@@ -1,0 +1,67 @@
+{
+    "user": {
+      "profile": {
+        "firstName": "Michael",
+        "lastName": "Smith",
+        "username": "mike95",
+        "email": "michael.smith@example.com",
+        "birthdate": "1995-03-15",
+        "joined": "2020-01-10",
+        "status": "active"
+      },
+      "address": {
+        "home": {
+          "street": "789 Oak Avenue",
+          "city": "Cityville",
+          "state": "AB",
+          "postalCode": "67890",
+          "country": "Countryville"
+        },
+        "work": {
+          "street": "123 Business Blvd",
+          "city": "Metropolis",
+          "state": "CD",
+          "postalCode": "12345",
+          "country": "Workland"
+        }
+      },
+      "education": {
+        "highSchool": {
+          "name": "City High School",
+          "graduationYear": 2013
+        },
+        "university": {
+          "name": "Tech University",
+          "degree": "Bachelor of Science",
+          "major": "Computer Engineering",
+          "graduationYear": 2017
+        }
+      },
+      "employment": {
+        "current": {
+          "position": "Senior Software Engineer",
+          "employer": "InnovateTech",
+          "yearsWorked": 5
+        },
+        "previous": [
+          {
+            "position": "Software Engineer",
+            "employer": "CodeMasters",
+            "yearsWorked": 2
+          },
+          {
+            "position": "Intern",
+            "employer": "ByteWave",
+            "yearsWorked": 1
+          }
+        ]
+      },
+      "interests": ["programming", "gaming", "photography", "hiking"],
+      "socialMedia": {
+        "twitter": "@mike95",
+        "linkedin": "linkedin.com/in/mikesmith"
+      },
+      "isMarried": false
+    }
+  }
+  
