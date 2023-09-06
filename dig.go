@@ -8,10 +8,14 @@ import (
 func Dig(h interface{}, keys ...interface{}) (interface{}, error) {
 	n := len(keys)
 	fmt.Println(n)
+	if n == 0 {
+		return nil, fmt.Errorf("key is missing")
+	}
 	for e, key := range keys {
 		fmt.Println(e, key)
 	}
-	return nil, fmt.Errorf("key is missing")
+	return nil, nil
+
 }
 
 func main() {
@@ -28,5 +32,7 @@ func main() {
 	}
 
 	c, err := Dig(b, "menu", "apple", "banna")
-	fmt.Println(c)
+	fmt.Println(c, err)
+	d, err := Dig(b)
+	fmt.Println(d, err)
 }
