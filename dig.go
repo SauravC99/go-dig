@@ -25,23 +25,24 @@ func Dig(h interface{}, keys ...interface{}) (interface{}, error) {
 		//assigns the underlying string value to the variable keyString. It does not convert
 		//using it with ok tests whether the interface value holds that type
 		keyString, ok := key.(string) //ok will be true if the key is a string
-		fmt.Println("  ", keyString, ok)
+		fmt.Println("  ", keyString, ok, "string branch")
 		if ok {
-			//copy the hash h into raw bc we want to keep h as type interface{} but we need to
-			//convert NOPE to type map[string]interface{} to access index. interface{} is non indexable
+			//the variable h is type interface{} but we need type map[string]interface{}
+			//to access index. interface{} is non indexable
 			//the h.(map[string]interface{}) is type assertion. checks and assigns the underlying
 			//map[string]interface{} of the h interface{} to variable raw
 			raw, ok := h.(map[string]interface{})
 			if !ok {
-				return nil, fmt.Errorf("'%v' is not a string accessable map", h)
+				return nil, fmt.Errorf("%v is not a string accessable map. Key '%v' at position '%v' not applicable. Map is type: %T", h, keyString, pos+1, h)
 			}
 
 			h, ok = raw[keyString]
 			if !ok {
-				return nil, fmt.Errorf("key '%v' is not found in %v", keyString, raw)
+				return nil, fmt.Errorf("key '%v' at position '%v' not found in  %v", keyString, pos+1, raw)
 			}
 
 			fmt.Println(h)
+			fmt.Printf("---%T---\n", h) //prints the var type
 
 			if pos == n-1 {
 				return h, nil
@@ -49,7 +50,7 @@ func Dig(h interface{}, keys ...interface{}) (interface{}, error) {
 			continue
 		}
 
-		return nil, fmt.Errorf("key is not supported: '%v'", key)
+		return nil, fmt.Errorf("key is not supported: '%v' type:%T", key, key)
 		//fmt.Println(h.(map[string]interface{}))
 	}
 
@@ -75,14 +76,19 @@ func main() {
 	//c, err := Dig(b, "menu", "apple", "banna")
 	//c, err := Dig(b, "user", "education", "university", "name")
 
-	//c, err := Dig(b, "menu", "items", 2, "id")
-	//c, err := Dig(b, "menu", 2, "id")
-	c, err := Dig(b, "menu", "items", "id")
-
-	fmt.Println(c, err)
-	//d, err := Dig(b)
-	//fmt.Println(d, err)
 	//arr := [4]string{"one", "two", "three", "four"}
-	//e, err := Dig(b, arr)
-	//fmt.Println(e, err)
+	//c, err := Dig(b, "menu", "items", arr, 2, "id")
+
+	c, err := Dig(b, "menu", "items", 2, "id")
+	//c, err := Dig(b, "menu", "items", 2.0, "id") //not supported
+	//c, err := Dig(b, "menu", 2, "id") //not a slice
+	//c, err := Dig(b, "menu", "items", "id") //not a string accessable map
+	//c, err := Dig(b, "menu", "apple") //key not found in map
+	//c, err := Dig(b, "menu", "items", 6) //index out of range
+	//c, err := Dig(b)                              //key is missing
+
+	//c, err := Dig(b, "more", 0, 0, "batters", "batter", 2, "type")
+
+	fmt.Println(c)
+	fmt.Println(err)
 }
