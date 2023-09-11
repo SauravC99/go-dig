@@ -49,6 +49,33 @@ func Dig(h interface{}, keys ...interface{}) (interface{}, error) {
 			}
 			continue
 		}
+		//type assertion, using with ok tests if that type is
+		keyInt, ok := key.(int) //ok will be true if the key is a int
+		fmt.Println("  ", keyInt, ok, "int branch")
+		if ok {
+			//the variable h is type interface{} but we need  type []interface{}
+			//to access index. We cannot index type interface{}
+			//type assertion to get the underlying type []interface{} from h interface{}
+			raw, ok := h.([]interface{})
+			if !ok {
+				return nil, fmt.Errorf("%v is not a slice/int accessable map. Key '%v' at position '%v' not applicable. Map is type: %T", h, keyInt, pos+1, h)
+			}
+
+			if keyInt < 0 || keyInt >= len(raw) {
+				return nil, fmt.Errorf("index '%v' at position '%v' out of range  %v has length '%v'", keyInt, pos+1, raw, len(raw))
+			}
+
+			//assign the result back to h
+			h = raw[keyInt]
+
+			fmt.Println(h)
+			fmt.Printf("---%T---\n", h) //prints the var type
+
+			if pos == n-1 {
+				return h, nil
+			}
+			continue
+		}
 
 		return nil, fmt.Errorf("key is not supported: '%v' type:%T", key, key)
 		//fmt.Println(h.(map[string]interface{}))
