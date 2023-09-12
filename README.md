@@ -1,4 +1,4 @@
-# GoLang-Dig
+# Go-Dig
 Implementation of Ruby's dig method in Go
 
 Inspired by mnogu/go-dig
