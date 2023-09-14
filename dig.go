@@ -74,6 +74,39 @@ func Dig(hash interface{}, keys ...interface{}) (interface{}, error) {
 			}
 			continue
 		}
+		/*
+			keyStringArr, ok := key.([]string)
+			fmt.Println("  ", keyStringArr, ok, "string arr branch")
+			if ok {
+				n2 := len(keyStringArr)
+				fmt.Println(n)
+				n += n2 - pos - 1
+				fmt.Println(n)
+
+				for pos2, key2 := range keyStringArr {
+					pos += 1
+					fmt.Println("  ", pos, pos2, key2, "-----inner string arr branch")
+					raw, ok := hash.(map[string]interface{})
+					if !ok {
+						return nil, fmt.Errorf("%v is not a string accessable map. Map is type: %T", hash, hash)
+					}
+
+					hash, ok = raw[key2]
+					if !ok {
+						return nil, fmt.Errorf("key '%v' not found in  %v", key2, raw)
+					}
+
+					fmt.Println(hash)
+					fmt.Printf("---%T---\n", hash) //prints the var type
+
+					if pos2 == n-1 {
+						return hash, nil
+					}
+					//continue
+				}
+				continue
+			}
+		*/
 
 		return nil, fmt.Errorf("key is not supported: '%v' type:%T", key, key)
 	}
