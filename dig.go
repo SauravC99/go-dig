@@ -1,4 +1,4 @@
-package main
+package dig
 
 import (
 	"encoding/json"
@@ -9,21 +9,12 @@ import (
 
 func Dig(hash interface{}, keys ...interface{}) (interface{}, error) {
 	n := len(keys)
-	if n == 0 {
-		return nil, fmt.Errorf("key is missing")
-	}
-
-	fmt.Println("num of keys:", n)
-	fmt.Println(hash)
 
 	for pos, key := range keys {
-		fmt.Println(pos, "key=", key)
-
 		//the key.(string) is type assertion. It gives access to an interface value's underlying value
 		//assigns the underlying string value to the variable keyString. It does not convert
 		//using it with ok tests whether the interface value holds that type
 		keyString, ok := key.(string) //ok will be true if the key is a string
-		fmt.Println("  ", keyString, ok, "string branch")
 		if ok {
 			//the variable h is type interface{} but we need type map[string]interface{}
 			//to access index. interface{} is non indexable
@@ -39,9 +30,6 @@ func Dig(hash interface{}, keys ...interface{}) (interface{}, error) {
 				return nil, fmt.Errorf("key '%v' at position '%v' not found in  %v", keyString, pos+1, inside)
 			}
 
-			fmt.Println(hash)
-			fmt.Printf("---%T---\n", hash) //prints the var type
-
 			if pos == n-1 {
 				return hash, nil
 			}
@@ -49,7 +37,6 @@ func Dig(hash interface{}, keys ...interface{}) (interface{}, error) {
 		}
 		//type assertion, using with ok tests if that type is
 		keyInt, ok := key.(int) //ok will be true if the key is a int
-		fmt.Println("  ", keyInt, ok, "int branch")
 		if ok {
 			//the variable h is type interface{} but we need  type []interface{}
 			//to access index. We cannot index type interface{}
@@ -66,9 +53,6 @@ func Dig(hash interface{}, keys ...interface{}) (interface{}, error) {
 			//assign the result back to the hash
 			hash = inside[keyInt]
 
-			fmt.Println(hash)
-			fmt.Printf("---%T---\n", hash) //prints the var type
-
 			if pos == n-1 {
 				return hash, nil
 			}
@@ -78,7 +62,7 @@ func Dig(hash interface{}, keys ...interface{}) (interface{}, error) {
 		return nil, fmt.Errorf("key is not supported: '%v' type:%T", key, key)
 	}
 
-	return nil, fmt.Errorf("ERROR")
+	return nil, fmt.Errorf("key is missing")
 
 }
 
