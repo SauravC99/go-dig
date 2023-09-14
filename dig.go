@@ -1,10 +1,7 @@
 package dig
 
 import (
-	"encoding/json"
 	"fmt"
-	"io"
-	"os"
 )
 
 func Dig(hash interface{}, keys ...interface{}) (interface{}, error) {
@@ -64,56 +61,4 @@ func Dig(hash interface{}, keys ...interface{}) (interface{}, error) {
 
 	return nil, fmt.Errorf("key is missing")
 
-}
-
-func main() {
-	file, err := os.Open("sample copy 2.json")
-	if err != nil {
-		fmt.Println(err)
-	}
-	rawBytes, err := io.ReadAll(file)
-	if err != nil {
-		fmt.Println(err)
-	}
-	var b interface{}
-	err = json.Unmarshal(rawBytes, &b)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	//c, err := Dig(b, "menu", "apple", "banna")
-	//c, err := Dig(b, "user", "education", "university", "name")
-
-	//c, err := Dig(b, "menu", "items", 2, "id")
-	//c, err := Dig(b, "menu", "items", 2.0, "id") //not supported
-	//c, err := Dig(b, "menu", 2, "id") //not a slice
-	//c, err := Dig(b, "menu", "items", "id") //not a string accessable map
-	//c, err := Dig(b, "menu", "apple") //key not found in map
-	//c, err := Dig(b, "menu", "items", 6) //index out of range
-	//c, err := Dig(b)                              //key is missing
-
-	c, err := Dig(b, "more", 0, 0, "batters", "batter", 2, "type")
-
-	//arr := []string{"one", "two", "three", "four"}
-	//arr := []string{"menu", "items"}
-	//arr := []string{"batters", "batter"}
-
-	//arr := [4]int{1, 2, 3, 4}
-
-	//c, err := Dig(b, "menu", "items", arr, 2, "id")
-	//c, err := Dig(b, "menu", "items")
-	//c, err := Dig(b, arr)
-	//c, err := Dig(b, "more", 0, 0, arr, 2, "type")
-
-	//c, err := Dig(b, "user", "education", "university", "name")
-	//arr := []string{"user", "education"}
-	//c, err := Dig(b, arr, "university", "name") //NOT WORK
-	//arr := []string{"education", "university"}
-	//c, err := Dig(b, "user", arr, "name")
-	//arr := []string{"university", "name"}
-	//c, err := Dig(b, "user", "education", arr)
-
-	fmt.Println()
-	fmt.Println(c)
-	fmt.Println(err)
 }
