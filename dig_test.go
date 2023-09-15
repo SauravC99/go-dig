@@ -66,6 +66,8 @@ func returnInterface() interface{} {
 	return a
 }
 
+// TestDig calls dig.Dig with a json document loaded as a interface{} and keys which
+// are the path to the desired value, checking for the correct return value and no error.
 func TestDig(t *testing.T) {
 	json := returnInterface()
 
@@ -77,11 +79,26 @@ func TestDig(t *testing.T) {
 	}
 }
 
+// TestDigStringReturn calls dig.Dig with a json document loaded as a interface{} and keys
+// which are the path to a string, checking for the correct return value and no error.
 func TestDigStringReturn(t *testing.T) {
 	json := returnInterface()
 
 	got, err := Dig(json, "apple")
 	want := "pear"
+
+	if got != want || err != nil {
+		t.Errorf("got %v, %v - wanted %v, %v", got, err, want, nil)
+	}
+}
+
+// TestDigFloatReturn calls dig.Dig with a json document loaded as a interface{} and keys which
+// are the path to a floating point number, checking for the correct return value and no error.
+func TestDigFloatReturn(t *testing.T) {
+	json := returnInterface()
+
+	got, err := Dig(json, "three")
+	want := 3.3
 
 	if got != want || err != nil {
 		t.Errorf("got %v, %v - wanted %v, %v", got, err, want, nil)
