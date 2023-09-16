@@ -2,6 +2,7 @@ package dig
 
 import (
 	"encoding/json"
+	"fmt"
 	"testing"
 )
 
@@ -175,4 +176,22 @@ func TestDigErrorIndexOutOfRange(t *testing.T) {
 	if got != nil || err == nil {
 		t.Errorf("got %v, %v - wanted %v, %v", got, err, nil, "index out of range")
 	}
+}
+
+func ExampleDig() {
+	json := returnInterface()
+
+	result, err := Dig(json, "menu", "header")
+	result1, err1 := Dig(json, "more", 0, 0, "type")
+	fmt.Println(result)
+	fmt.Println(err)
+	fmt.Println()
+	fmt.Println(result1)
+	fmt.Println(err1)
+	// Output:
+	// SVG Viewer
+	// <nil>
+	//
+	// donut
+	// <nil>
 }
