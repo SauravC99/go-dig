@@ -178,6 +178,33 @@ func TestDigErrorIndexOutOfRange(t *testing.T) {
 	}
 }
 
+func BenchmarkDigShallow(b *testing.B) {
+	json := returnInterface()
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		Dig(json, "apple")
+	}
+}
+
+func BenchmarkDigMedium(b *testing.B) {
+	json := returnInterface()
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		Dig(json, "menu", "items", 1, "id")
+	}
+}
+
+func BenchmarkDigDeep(b *testing.B) {
+	json := returnInterface()
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		Dig(json, "more", 0, 0, "batters", "batter", 1, "type")
+	}
+}
+
 func ExampleDig() {
 	json := returnInterface()
 
