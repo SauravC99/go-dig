@@ -178,6 +178,8 @@ func TestDigErrorIndexOutOfRange(t *testing.T) {
 	}
 }
 
+// BenchmarkDigShallow calls dig.Dig looking for a value
+// that is shallow and times its execution.
 func BenchmarkDigShallow(b *testing.B) {
 	json := returnInterface()
 	b.ResetTimer()
@@ -187,6 +189,8 @@ func BenchmarkDigShallow(b *testing.B) {
 	}
 }
 
+// BenchmarkDigMedium calls dig.Dig looking for a value
+// that is medium nested and times its execution.
 func BenchmarkDigMedium(b *testing.B) {
 	json := returnInterface()
 	b.ResetTimer()
@@ -196,6 +200,8 @@ func BenchmarkDigMedium(b *testing.B) {
 	}
 }
 
+// BenchmarkDigDeep calls dig.Dig looking for a value
+// that is deeply nested and times its execution.
 func BenchmarkDigDeep(b *testing.B) {
 	json := returnInterface()
 	b.ResetTimer()

@@ -1,8 +1,6 @@
 package dig
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func Dig(hash interface{}, keys ...interface{}) (interface{}, error) {
 	n := len(keys)
@@ -11,12 +9,12 @@ func Dig(hash interface{}, keys ...interface{}) (interface{}, error) {
 		//the key.(string) is type assertion. It gives access to an interface value's underlying value
 		//assigns the underlying string value to the variable keyString. It does not convert
 		//using it with ok tests whether the interface value holds that type
-		keyString, ok := key.(string) //ok will be true if the key is a string
+		keyString, ok := key.(string)
 		if ok {
 			//the variable h is type interface{} but we need type map[string]interface{}
 			//to access index. interface{} is non indexable
 			//the h.(map[string]interface{}) is type assertion. checks and assigns the underlying
-			//map[string]interface{} of the h interface{} to variable raw
+			//map[string]interface{} of the h interface{} to variable inside
 			inside, ok := hash.(map[string]interface{})
 			if !ok {
 				return nil, fmt.Errorf("%v is not a string accessable map. Key '%v' at position '%v' not applicable. Map is type: %T", hash, keyString, pos+1, hash)
@@ -33,11 +31,11 @@ func Dig(hash interface{}, keys ...interface{}) (interface{}, error) {
 			continue
 		}
 		//type assertion, using with ok tests if that type is
-		keyInt, ok := key.(int) //ok will be true if the key is a int
+		keyInt, ok := key.(int)
 		if ok {
 			//the variable h is type interface{} but we need  type []interface{}
 			//to access index. We cannot index type interface{}
-			//type assertion to get the underlying type []interface{} from h interface{}
+			//type assertion to get the underlying type []interface{} from hash interface{}
 			inside, ok := hash.([]interface{})
 			if !ok {
 				return nil, fmt.Errorf("%v is not a slice/int accessable map. Key '%v' at position '%v' not applicable. Map is type: %T", hash, keyInt, pos+1, hash)
@@ -60,5 +58,4 @@ func Dig(hash interface{}, keys ...interface{}) (interface{}, error) {
 	}
 
 	return nil, fmt.Errorf("key is missing")
-
 }
