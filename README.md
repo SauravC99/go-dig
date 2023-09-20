@@ -1,4 +1,6 @@
 # Go-Dig
+[![Go Reference](https://pkg.go.dev/badge/github.com/sauravc99/go-dig.svg)](https://pkg.go.dev/github.com/sauravc99/go-dig)
+
 go-dig is an implementation of Ruby's dig methods in GoLang. To handle data such as json files you need to create a struct which can get very complex. go-dig allows you to dig thorugh an object using a set of keys and will return the data or object in its path. It will return nil and an error if the value is not found.
 
 

@@ -2,6 +2,11 @@ package dig
 
 import "fmt"
 
+// Dig parses through an object using keys and returns the data
+// or object found at the end of its path. Successful runs
+// will return the data or object and error will be nil.
+// If there is an error, the return value will be nil and
+// a error will be returned.
 func Dig(hash interface{}, keys ...interface{}) (interface{}, error) {
 	n := len(keys)
 
