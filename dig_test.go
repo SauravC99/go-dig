@@ -212,19 +212,48 @@ func BenchmarkDigDeep(b *testing.B) {
 }
 
 func ExampleDig() {
-	json := returnInterface()
+	a := []byte(`{"apple":"pear","menu":{"item":"fruit","type":"tree"},"more":[[{"taste":"sweet"}]]}`)
+	var jsonData interface{}
+	json.Unmarshal(a, &jsonData)
 
-	result, err := Dig(json, "menu", "header")
-	result1, err1 := Dig(json, "more", 0, 0, "type")
+	result, err := Dig(jsonData, "apple")
+	if err != nil {
+		fmt.Println(err)
+	}
 	fmt.Println(result)
 	fmt.Println(err)
 	fmt.Println()
+
+	result1, err := Dig(jsonData, "menu", "item")
+	if err != nil {
+		fmt.Println(err)
+	}
 	fmt.Println(result1)
-	fmt.Println(err1)
+	fmt.Println(err)
+	fmt.Println()
+
+	result2, err := Dig(jsonData, "more", 0, 0, "taste")
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(result2)
+	fmt.Println(err)
+	fmt.Println()
+
+	//this one errors
+	result3, err := Dig(jsonData, "menu", "apple")
+	fmt.Println(result3)
+	fmt.Println(err)
 	// Output:
-	// SVG Viewer
+	// pear
 	// <nil>
 	//
-	// donut
+	// fruit
 	// <nil>
+	//
+	// sweet
+	// <nil>
+	//
+	// <nil>
+	// key 'apple' at position '2' not found in  map[item:fruit type:tree]
 }
