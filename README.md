@@ -171,28 +171,28 @@ func main() {
 	}
 
 
-    result, err := dig.Dig(jsonData, "three")
-    if err != nil {
-        fmt.Println(err)
-    }
-    // result : 3.3
-    // err    : nil
+	result, err := dig.Dig(jsonData, "three")
+	if err != nil {
+		fmt.Println(err)
+	}
+	// result : 3.3
+	// err    : nil
 
-    result1, err := dig.Dig(jsonData, "menu", "header")
-    if err != nil {
-        fmt.Println(err)
-    }
-    // result1 : SVG Viewer
-    // err     : nil
+	result1, err := dig.Dig(jsonData, "menu", "header")
+	if err != nil {
+		fmt.Println(err)
+	}
+	// result1 : SVG Viewer
+	// err     : nil
 
 
-    // You can also dig through arrays using a index
-    result2, err := dig.Dig(jsonData, "more", 0, 0, "batters", "batter", 1, "type")
-    if err != nil {
-        fmt.Println(err)
-    }
-    // result2 : Blueberry
-    // err     : nil
+	// You can also dig through arrays using a index
+	result2, err := dig.Dig(jsonData, "more", 0, 0, "batters", "batter", 1, "type")
+	if err != nil {
+		fmt.Println(err)
+	}
+	// result2 : Blueberry
+	// err     : nil
 }
 ```
 
