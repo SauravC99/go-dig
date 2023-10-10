@@ -202,7 +202,7 @@ func main() {
 ## Errors
 If you get a return of nil and the error variable is not nil, there has been an error. go-dig will return a helpful error message to help you diagnose the issue.
 
-The error message will say which key parameter is the problem and it's position in the method. The positions start at 1 after the interface parameter. 
+The error message will say which key parameter is the problem and it's position. The positions start at 1 after the interface parameter. 
 Ex:
 ```go
 result, err := dig.Dig(jsonData, "menu", "items", 1, "id")
